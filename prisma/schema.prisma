@@ -1,0 +1,31 @@
+// prisma/schema.prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"] // Habilita a alta performance serverless
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model UserProgress {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  day       Int
+  completed Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, day])
+  @@map("user_progress")
+}
+
+model Checklist {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  day       Int
+  tasks     Boolean[]
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, day])
+  @@map("checklists")
+}
