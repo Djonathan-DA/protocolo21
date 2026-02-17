@@ -15,7 +15,12 @@ export default async function ChecklistPage() {
 
   const totalTasks = protocolData.length * 3
   let completedTasks = 0
-  savedChecklists.forEach((c: { tasks: { filter: (arg0: BooleanConstructor) => { (): any; new(): any; length: number } } }) => completedTasks += c.tasks.filter(Boolean).length)
+  
+  // ✅ Tipagem limpa e estrita: avisamos o TS exatamente o que é o 'c' e o 'task'
+  savedChecklists.forEach((c: { tasks: boolean[] }) => {
+    completedTasks += c.tasks.filter((task: boolean) => task === true).length
+  })
+  
   const progressPct = Math.round((completedTasks / totalTasks) * 100)
 
   return (
@@ -32,11 +37,12 @@ export default async function ChecklistPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {protocolData.map((d) => {
-          const savedData = savedChecklists.find((c: { day: number }) => c.day === d.day)
+          // ✅ Tipagem limpa adicionada aqui também
+          const savedData = savedChecklists.find((c: { day: number; tasks: boolean[] }) => c.day === d.day)
           const tasksStatus = savedData?.tasks || [false, false, false]
-          const isAllDone = tasksStatus.every((v: any) => v)
+          const isAllDone = tasksStatus.every((v: boolean) => v === true)
 
           return (
             <Card key={d.day} className={`relative ${isAllDone ? 'border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.15)] bg-emerald-500/5' : ''}`}>
