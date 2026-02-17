@@ -32,6 +32,16 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent z-0 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex-1 ">
+
+            <div className="mb-6 rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_20px_rgba(251,191,36,0.1)] relative group">
+              <div className="absolute inset-0 bg-dark-900/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+              <img 
+                src="banner.png" 
+                alt="Pele Perfeita" 
+                className="w-full h-48 md:h-48 object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+
             <h1 className="heading-gold text-3xl md:text-5xl text-white mb-2">Bem-vinda ao método que mudará a sua pele</h1>
             <p className="text-gray-400 text-lg mb-6">Sua jornada de 21 dias para uma pele perfeita começou.</p>
             <div className="max-w-md">

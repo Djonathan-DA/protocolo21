@@ -32,7 +32,7 @@ export default async function ChecklistPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
         {protocolData.map((d) => {
           const savedData = savedChecklists.find((c: { day: number }) => c.day === d.day)
           const tasksStatus = savedData?.tasks || [false, false, false]
