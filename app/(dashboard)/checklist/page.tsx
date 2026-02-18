@@ -49,7 +49,7 @@ export default async function ChecklistPage() {
               {isAllDone && <Award className="absolute top-4 right-4 text-emerald-400" size={24} />}
               <h3 className="text-white font-bold mb-4 font-serif text-xl">Dia {d.day}</h3>
               <div className="space-y-4">
-                {d.tasks.map((task, idx) => {
+                {d.steps.map((task, idx) => {
                   const toggleTask = async () => {
                     'use server'
                     const newTasks = [...tasksStatus]
@@ -63,7 +63,7 @@ export default async function ChecklistPage() {
                           {tasksStatus[idx] && <Check size={14} className="text-white" />}
                         </div>
                         <span className={`text-sm transition-colors ${tasksStatus[idx] ? 'text-gray-500 line-through' : 'text-gray-300 group-hover:text-white'}`}>
-                          {task}
+                          {task.title}
                         </span>
                       </button>
                     </form>

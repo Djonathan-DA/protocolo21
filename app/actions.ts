@@ -10,7 +10,7 @@ export async function updateProgress(userId: string, day: number, completed: boo
     update: { completed },
     create: { userId, day, completed }
   })
-  revalidatePath(`/modulos/${day}`)
+  revalidatePath(`/modules/${day}`)
   revalidatePath('/home')
 }
 
@@ -29,4 +29,20 @@ export async function fetchUserProgress(userId: string) {
 
 export async function fetchUserChecklists(userId: string) {
   return await prisma.checklist.findMany({ where: { userId } })
+}
+
+export async function markDayAsCompleted(userId: string, day: number, completed: boolean) {
+  try {
+    await prisma.userProgress.upsert({
+      where: { userId_day: { userId, day } },
+      update: { completed },
+      create: { userId, day, completed }
+    })
+    revalidatePath(`/modules/${day}`)
+    revalidatePath('/home')
+    return { success: true }
+  } catch (error) {
+    console.error('Error marking day as completed:', error)
+    throw error
+  }
 }

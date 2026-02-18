@@ -21,9 +21,9 @@ export default async function HomePage() {
   const progressPct = Math.round((completedDays / 21) * 100)
 
   const modules = [
-    { id: 1, name: "Detoxificação", days: "Dias 1 a 7", icon: <Leaf className="text-emerald-400" size={28} /> },
-    { id: 2, name: "Renovação Celular", days: "Dias 8 a 14", icon: <Sparkles className="text-rosegold" size={28} /> },
-    { id: 3, name: "Blindagem", days: "Dias 15 a 21", icon: <Shield className="text-gold" size={28} /> }
+    { id: 1, name: "Detoxificação", days: "Dias 1 a 7", startDay: 1, icon: <Leaf className="text-emerald-400" size={28} /> },
+    { id: 2, name: "Renovação Celular", days: "Dias 8 a 14", startDay: 8, icon: <Sparkles className="text-rosegold" size={28} /> },
+    { id: 3, name: "Blindagem", days: "Dias 15 a 21", startDay: 15, icon: <Shield className="text-gold" size={28} /> }
   ]
 
   return (
@@ -58,7 +58,7 @@ export default async function HomePage() {
       <h2 className="heading-gold text-2xl">Seus Módulos</h2>
       <div className="grid md:grid-cols-3 gap-6">
         {modules.map(m => (
-          <Link href={`/modulos/${(m.id - 1) * 7 + 1}`} key={m.id}>
+          <Link href={`/modules/${m.startDay}`} key={m.id}>
             <Card className="h-full hover-3d group cursor-pointer border-t-2 border-t-white/10 hover:border-t-gold/50 flex flex-col">
               <div className="w-14 h-14 rounded-full bg-dark-900 flex items-center justify-center mb-4 border border-white/10 group-hover:scale-110 transition-transform">
                 {m.icon}
