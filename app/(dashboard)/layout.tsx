@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { LogOut, Home, Leaf, Sparkles, Shield, CheckSquare, Gift, Menu, ChevronDown } from 'lucide-react'
 import { protocolData } from '@/lib/data'
+import { DashboardLayoutSkeleton } from '@/components/skeletons/dashboard-layout-skeleton'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -183,6 +184,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {isOpen && <div className="fixed inset-0 bg-black/60 z-30 md:hidden" onClick={() => setIsOpen(false)} />}
 
       <main className="flex-1 p-20 h-full overflow-y-auto mt-15 relative z-10 scroll-smooth">
+        <DashboardLayoutSkeleton />
         {children}
       </main>
     </div>
